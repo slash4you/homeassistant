@@ -1,0 +1,18 @@
+[Unit]
+Description=PWM fan speed control
+After=sysinit.target
+
+[Service]
+# Environment=PWM_FAN_SLEEP_MS=60000
+Environment=PWM_FAN_MIN_OFF_TEMP_C=62
+Environment=PWM_FAN_MIN_ON_TEMP_C=63
+Environment=PWM_FAN_MAX_TEMP_C=80
+Environment=PWM_FAN_SLEEP_MS=1000
+ExecStart=/usr/bin/sh -c 'exec /usr/sbin/pwm_fan_control2'
+Type=simple
+User=root
+Group=root
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
