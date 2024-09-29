@@ -1,0 +1,51 @@
+#
+# These things are run when an Openbox X Session is started.
+# You may place a similar script in $HOME/.config/openbox/autostart
+# to run user-specific things.
+#
+
+# If you want to use GNOME config tools...
+#
+#if test -x /usr/lib/aarch64-linux-gnu/gnome-settings-daemon >/dev/null; then
+#  /usr/lib/aarch64-linux-gnu/gnome-settings-daemon &
+#elif which gnome-settings-daemon >/dev/null 2>&1; then
+#  gnome-settings-daemon &
+#fi
+
+# If you want to use XFCE config tools...
+#
+#xfce-mcs-manager &
+
+# Enable/Disable any form of screen saver / screen blanking / power management
+# Disable screen saver
+xset s off off
+# Enable screen saver
+#xset s 120 120
+# Disable screan blanking
+xset s noblank
+# Disable DPMS
+xset -dpms
+# Enable DPMS : standby/suspend/off
+#xset dpms 0 120 0
+
+# Allow quitting the X server with CTRL-ATL-Backspace
+#setxkbmap -option terminate:ctrl_alt_bksp
+
+#matchbox-keyboard --daemon &
+
+
+# Start Chromium in kiosk mode
+
+sed -i 's/"exited_cleanly":false/"exited_cleanly":true/' ~/.config/chromium/'Local State'
+
+sed -i 's/"exited_cleanly":false/"exited_cleanly":true/; s/"exit_type":"[^"]\+"/"exit_type":"Normal"/' ~/.config/chromium/Default/Preferences
+
+# default start in kiosk mode
+chromium-browser --start-fullscreen --noerrdialogs --disable-translate --no-first-run --fast --fast-start  --disable-infobars --disable-features=TranslateUI --enable-features=OverlayScrollbar --kiosk $KIOSK_URL
+# remove fullscreen and kiosk options to display virtual keyboard ( onboard )
+#chromium-browser --noerrdialogs --disable-translate --no-first-run --fast --fast-start  --disable-infobars --disable-features=TranslateUI --enable-features=OverlayScrollbar $KIOSK_URL
+# incognito option prevents from auto login
+#chromium-browser --start-fullscreen --incognito --noerrdialogs --disable-translate --no-first-run --fast --fast-start  --disable-infobars --disable-features=TranslateUI --enable-features=OverlayScrollbar --kiosk $KIOSK_URL
+# no needed update
+#chromium-browser --noerrdialogs --disable-infobars --enable-features=OverlayScrollbar --kiosk $KIOSK_URL --check-for-update-interval=31536000
+
