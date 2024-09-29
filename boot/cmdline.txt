@@ -1,0 +1,1 @@
+zram.enabled=1 zram.num_devices=3 rootwait cgroup_enable=memory fsck.repair=yes console=tty1 root=PARTUUID=8d3d53e3-6d49-4c38-8349-aff6859e82fd ro rauc.slot=A systemd.machine_id=3119520dbb91424a98fb6a6865b0feda nvme_core.default_ps_max_latency_us=0 pcie_aspm=off
